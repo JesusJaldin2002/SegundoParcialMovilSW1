@@ -28,31 +28,68 @@ class CoursesScreen extends StatelessWidget {
         }
 
         return ListView.builder(
+          padding: const EdgeInsets.all(8.0),
           itemCount: controller.courses.length,
           itemBuilder: (context, index) {
             Curso course = controller.courses[index];
-            return ListTile(
-              title: Text(course.cursoName),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(course.materiaName),
-                  Text('Horario: ${course.schedule}'),
-                  Text('Aula: ${course.aulaName}'),
-                ],
+            return Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.visibility),
-                    onPressed: () => _onViewNoticesTap(context, course),
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(16.0),
+                title: Text(
+                  course.cursoName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () => _onCreateNoticeTap(context, course),
-                  ),
-                ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 4),
+                    Text(
+                      course.materiaName,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.schedule, size: 20, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Text('Horario: ${course.schedule}'),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Icon(Icons.location_on, size: 20, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Text('Aula: ${course.aulaName}'),
+                      ],
+                    ),
+                  ],
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.visibility, color: Color.fromARGB(255, 45, 70, 40)),
+                      onPressed: () => _onViewNoticesTap(context, course),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.add, color: Color.fromARGB(255, 45, 70, 40)),
+                      onPressed: () => _onCreateNoticeTap(context, course),
+                    ),
+                  ],
+                ),
+                onTap: () => _onViewNoticesTap(context, course),
               ),
             );
           },
