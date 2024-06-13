@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:segundo_parcial_movil_sw1/src/screens/notices/notices_controller.dart';
 import 'package:segundo_parcial_movil_sw1/src/models/notice.dart';
+import 'package:segundo_parcial_movil_sw1/src/screens/events/events_controller.dart';
 
-class NoticesScreen extends StatelessWidget {
+class EventsScreen extends StatelessWidget {
   final int id;
-  final NoticesController controller = Get.put(NoticesController());
+  final EventsController controller = Get.put(EventsController());
 
-  NoticesScreen({super.key, required this.id});
+  EventsScreen({super.key, required this.id});
 
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // Fetch notices when the screen is built
-    controller.fetchNotices(id);
+    // Fetch events when the screen is built
+    controller.fetchEvents(id);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 45, 70, 40),
         title: const Text(
-          'Noticias',
+          'Eventos',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -105,13 +105,13 @@ class NoticesScreen extends StatelessWidget {
                               .parse(startDateController.text);
                           DateTime endDate =
                               DateFormat('yyyy-MM-dd').parse(endDateController.text);
-                          controller.filterNotices(startDate, endDate);
+                          controller.filterEvents(startDate, endDate);
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 45, 70, 40),
                       ),
-                      child: const Text('Buscar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                      child: const Text('Buscar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -120,7 +120,7 @@ class NoticesScreen extends StatelessWidget {
                       onPressed: () {
                         startDateController.clear();
                         endDateController.clear();
-                        controller.filteredNotices.value = controller.notices;
+                        controller.filteredEvents.value = controller.events;
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 92, 92, 92),
@@ -137,14 +137,14 @@ class NoticesScreen extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if (controller.filteredNotices.isEmpty) {
-                    return const Center(child: Text('No hay noticias disponibles'));
+                  if (controller.filteredEvents.isEmpty) {
+                    return const Center(child: Text('No hay eventos disponibles'));
                   }
 
                   return ListView.builder(
-                    itemCount: controller.filteredNotices.length,
+                    itemCount: controller.filteredEvents.length,
                     itemBuilder: (context, index) {
-                      Notice notice = controller.filteredNotices[index];
+                      Notice event = controller.filteredEvents[index];
                       return Card(
                         margin: const EdgeInsets.all(10),
                         child: Padding(
@@ -153,27 +153,25 @@ class NoticesScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                notice.title,
+                                event.title,
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Text(notice.description),
+                              Text(event.description),
                               const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      'Fecha Inicio: ${notice.fechaInicio != null ? "${notice.fechaInicio!.day.toString().padLeft(2, '0')}-${notice.fechaInicio!.month.toString().padLeft(2, '0')}-${notice.fechaInicio!.year}" : "N/A"}'),
-                                  Text(
-                                      'Fecha Fin: ${notice.fechaFin != null ? "${notice.fechaFin!.day.toString().padLeft(2, '0')}-${notice.fechaFin!.month.toString().padLeft(2, '0')}-${notice.fechaFin!.year}" : "N/A"}'),
-                                ],
+                              Text(
+                                'Fecha Inicio: ${event.fechaInicio != null ? "${event.fechaInicio!.day.toString().padLeft(2, '0')}-${event.fechaInicio!.month.toString().padLeft(2, '0')}-${event.fechaInicio!.year}" : "N/A"}',
                               ),
                               const SizedBox(height: 5),
-                              Text('Curso: ${notice.curso ?? "N/A"}'),
-                              Text('Materia: ${notice.materia ?? "N/A"}'),
+                              Text(
+                                'Fecha Presentación: ${event.fechaFin != null ? "${event.fechaFin!.day.toString().padLeft(2, '0')}-${event.fechaFin!.month.toString().padLeft(2, '0')}-${event.fechaFin!.year}" : "N/A"}',
+                              style: const TextStyle(color: Color.fromARGB(255, 235, 112, 103), fontWeight: FontWeight.bold),),
+                              const SizedBox(height: 5),
+                              Text('Curso: ${event.curso ?? "N/A"}'),
+                              Text('Materia: ${event.materia ?? "N/A"}'),
                             ],
                           ),
                         ),

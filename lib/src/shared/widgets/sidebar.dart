@@ -75,6 +75,38 @@ class Sidebar extends StatelessWidget {
                     }
                   },
                 ),
+                FutureBuilder<bool>(
+                  future: _isStudent(),
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(); // Placeholder while loading
+                    } else if (snapshot.hasData && snapshot.data!) {
+                      return ListTile(
+                        leading: const Icon(Icons.event),
+                        title: const Text('Eventos'),
+                        onTap: () => _onItemTapped(3),
+                      );
+                    } else {
+                      return Container(); // Return empty container if not student
+                    }
+                  },
+                ),
+                FutureBuilder<bool>(
+                  future: _isGuardian(),
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(); // Placeholder while loading
+                    } else if (snapshot.hasData && snapshot.data!) {
+                      return ListTile(
+                        leading: const Icon(Icons.calendar_today),
+                        title: const Text('Agenda de Hijos'),
+                        onTap: () => _onItemTapped(4),
+                      );
+                    } else {
+                      return Container(); // Return empty container if not guardian
+                    }
+                  },
+                ),
                 ListTile(
                   leading: const Icon(Icons.exit_to_app),
                   title: const Text(
@@ -99,7 +131,19 @@ class Sidebar extends StatelessWidget {
     return modelName == 'hr.employee';
   }
 
-  void _onItemTapped(int index) {
+  Future<bool> _isStudent() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? modelName = prefs.getString('model_name');
+    return modelName == 'academic.student';
+  }
+
+  Future<bool> _isGuardian() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? modelName = prefs.getString('model_name');
+    return modelName == 'academic.apoderado';
+  }
+
+  void _onItemTapped(int index) async {
     switch (index) {
       case 0:
         Get.offAllNamed('/home');
@@ -109,6 +153,20 @@ class Sidebar extends StatelessWidget {
         break;
       case 2:
         usersProvider.logout();
+        break;
+      case 3:
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? userId = prefs.getString('user_id');
+        if (userId != null) {
+          Get.toNamed('/events/$userId');
+        }
+        break;
+      case 4:
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? userId = prefs.getString('user_id');
+        if (userId != null) {
+          Get.toNamed('/agenda/$userId');
+        }
         break;
     }
   }

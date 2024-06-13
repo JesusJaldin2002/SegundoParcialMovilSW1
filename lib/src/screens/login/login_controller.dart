@@ -45,6 +45,7 @@ class LoginController extends GetxController {
           await prefs.setString('user_name', responseBody['user_name']);
 
           String? savedToken = prefs.getString('user_name');
+          // ignore: avoid_print
           print('Modelo guardado: $savedToken');
           Get.toNamed('/home');
         }

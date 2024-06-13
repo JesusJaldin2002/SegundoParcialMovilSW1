@@ -38,18 +38,18 @@ class CoursesScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(16.0),
-                title: Text(
-                  course.cursoName,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Column(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      course.cursoName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 4),
                     Text(
                       course.materiaName,
@@ -63,7 +63,15 @@ class CoursesScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.schedule, size: 20, color: Colors.grey[600]),
                         const SizedBox(width: 4),
-                        Text('Horario: ${course.schedule}'),
+                        Flexible(
+                          child: Text(
+                            'Horario: ${course.schedule}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              height: 1.5,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -71,25 +79,27 @@ class CoursesScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.location_on, size: 20, color: Colors.grey[600]),
                         const SizedBox(width: 4),
-                        Text('Aula: ${course.aulaName}'),
+                        Flexible(
+                          child: Text('Aula: ${course.aulaName}'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.visibility, color: Color.fromARGB(255, 45, 70, 40)),
+                          onPressed: () => _onViewNoticesTap(context, course),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add, color: Color.fromARGB(255, 45, 70, 40)),
+                          onPressed: () => _onCreateNoticeTap(context, course),
+                        ),
                       ],
                     ),
                   ],
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.visibility, color: Color.fromARGB(255, 45, 70, 40)),
-                      onPressed: () => _onViewNoticesTap(context, course),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add, color: Color.fromARGB(255, 45, 70, 40)),
-                      onPressed: () => _onCreateNoticeTap(context, course),
-                    ),
-                  ],
-                ),
-                onTap: () => _onViewNoticesTap(context, course),
               ),
             );
           },

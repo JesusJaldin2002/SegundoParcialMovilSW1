@@ -71,8 +71,7 @@ class NoticeProvider extends GetConnect {
           };
         } else {
           List<Notice> notices = List<Notice>.from(
-              response.body.map((notice) => Notice.fromJson(notice))
-          );
+              response.body.map((notice) => Notice.fromJson(notice)));
           return {
             'success': true,
             'data': notices,
@@ -94,4 +93,36 @@ class NoticeProvider extends GetConnect {
     };
   }
 
+  Future<Map<String, dynamic>> getNoticesByUser(int userId) async {
+    try {
+      final response = await get(
+        '$url/api/notices/student/$userId',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.status.hasError) {
+        return {
+          'success': false,
+          'message': response.body['error']['message'],
+          'data': response.body['error']['data'],
+        };
+      } else {
+        List<Notice> notices = List<Notice>.from(
+            response.body.map((notice) => Notice.fromJson(notice))
+        );
+        return {
+          'success': true,
+          'data': notices,
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'An error occurred',
+        'data': e.toString(),
+      };
+    }
+  }
 }
