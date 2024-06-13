@@ -76,6 +76,22 @@ class Sidebar extends StatelessWidget {
                   },
                 ),
                 FutureBuilder<bool>(
+                  future: _isEmployee(),
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(); // Placeholder while loading
+                    } else if (snapshot.hasData && snapshot.data!) {
+                      return ListTile(
+                        leading: const Icon(Icons.assignment),
+                        title: const Text('Generar Tarea'),
+                        onTap: () => _onItemTapped(5),
+                      );
+                    } else {
+                      return Container(); // Return empty container if not employee
+                    }
+                  },
+                ),
+                FutureBuilder<bool>(
                   future: _isStudent(),
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -98,8 +114,8 @@ class Sidebar extends StatelessWidget {
                       return Container(); // Placeholder while loading
                     } else if (snapshot.hasData && snapshot.data!) {
                       return ListTile(
-                        leading: const Icon(Icons.calendar_today),
-                        title: const Text('Agenda de Hijos'),
+                        leading: const Icon(Icons.child_care),
+                        title: const Text('Hijos inscritos'),
                         onTap: () => _onItemTapped(4),
                       );
                     } else {
@@ -168,6 +184,12 @@ class Sidebar extends StatelessWidget {
           Get.toNamed('/agenda/$userId');
         }
         break;
+      case 5:
+      print("Navigating to /chatgpt");
+      Get.toNamed('/chatgpt');
+      break;
+    default:
+      print("Unknown index: $index");
     }
   }
 }

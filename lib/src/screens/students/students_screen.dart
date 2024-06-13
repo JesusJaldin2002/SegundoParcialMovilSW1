@@ -1,3 +1,4 @@
+// screens/students_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segundo_parcial_movil_sw1/src/models/student.dart';
@@ -57,9 +58,23 @@ class StudentsScreen extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text('Curso: ${student.courseName}'),
-                          onTap: () {
-                            Get.toNamed('/events/${student.userId}');
-                          },
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.event),
+                                onPressed: () {
+                                  Get.toNamed('/events/${student.userId}');
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.book),
+                                onPressed: () {
+                                  Get.toNamed('/boletin/${student.userId}');
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
