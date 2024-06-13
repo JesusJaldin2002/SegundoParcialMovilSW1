@@ -26,14 +26,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'AutoFix',
+      title: 'College',
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => LoginScreen()),
         GetPage(name: '/home', page: () => const HomeScreen()),
-
+        GetPage(name: '/courses', page: () =>  CoursesScreen()),
+        GetPage(
+          name: '/create-notice/:id',
+          page: () => CreateNoticeScreen(id: int.parse(Get.parameters['id']!)),
+        ),
+        GetPage(
+          name: '/notices/:id',
+          page: () => NoticesScreen(id: int.parse(Get.parameters['id']!)),
+        ),
       ],
       navigatorKey: Get.key,
     );

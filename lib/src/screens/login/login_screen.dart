@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                   offset: Offset(0, 0.75))
             ],
             border: Border.all(
-              color: Color.fromARGB(255, 200, 200, 200),
+              color: const Color.fromARGB(255, 200, 200, 200),
               width: 3,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(15))),

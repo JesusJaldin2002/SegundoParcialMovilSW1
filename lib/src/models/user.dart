@@ -13,6 +13,7 @@ class User {
     String email;
     String token;
     String modelName;
+    String userName;
     Responsedetail responsedetail;
 
     User({
@@ -20,6 +21,7 @@ class User {
         required this.email,
         required this.token,
         required this.modelName,
+        required this.userName,
         required this.responsedetail,
     });
 
@@ -28,6 +30,7 @@ class User {
         email: json["email"],
         token: json["token"],
         modelName: json["model_name"],
+        userName: json["user_name"],
         responsedetail: Responsedetail.fromJson(json["responsedetail"]),
     );
 
@@ -36,6 +39,7 @@ class User {
         "email": email,
         "token": token,
         "model_name": modelName,
+        "user_name": userName,
         "responsedetail": responsedetail.toJson(),
     };
 }

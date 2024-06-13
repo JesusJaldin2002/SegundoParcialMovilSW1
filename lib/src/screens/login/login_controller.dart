@@ -41,9 +41,11 @@ class LoginController extends GetxController {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('token', responseBody['token']);
           await prefs.setString('user_id', responseBody['user_id'].toString());
+          await prefs.setString('model_name', responseBody['model_name']);
+          await prefs.setString('user_name', responseBody['user_name']);
 
-          String? savedToken = prefs.getString('token');
-          print('Token guardado: $savedToken');
+          String? savedToken = prefs.getString('user_name');
+          print('Modelo guardado: $savedToken');
           Get.toNamed('/home');
         }
       } else {

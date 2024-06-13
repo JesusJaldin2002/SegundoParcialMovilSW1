@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bienvenido a la APP',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 45, 70, 40),
         
       ),
       body: const Center(
