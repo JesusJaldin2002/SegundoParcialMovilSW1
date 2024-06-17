@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segundo_parcial_movil_sw1/src/providers/users_provider.dart';
@@ -61,7 +63,8 @@ class Sidebar extends StatelessWidget {
                 ),
                 FutureBuilder<bool>(
                   future: _isEmployee(),
-                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(); // Placeholder while loading
                     } else if (snapshot.hasData && snapshot.data!) {
@@ -77,7 +80,8 @@ class Sidebar extends StatelessWidget {
                 ),
                 FutureBuilder<bool>(
                   future: _isEmployee(),
-                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(); // Placeholder while loading
                     } else if (snapshot.hasData && snapshot.data!) {
@@ -93,7 +97,8 @@ class Sidebar extends StatelessWidget {
                 ),
                 FutureBuilder<bool>(
                   future: _isStudent(),
-                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(); // Placeholder while loading
                     } else if (snapshot.hasData && snapshot.data!) {
@@ -109,7 +114,8 @@ class Sidebar extends StatelessWidget {
                 ),
                 FutureBuilder<bool>(
                   future: _isGuardian(),
-                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(); // Placeholder while loading
                     } else if (snapshot.hasData && snapshot.data!) {
@@ -185,11 +191,11 @@ class Sidebar extends StatelessWidget {
         }
         break;
       case 5:
-      print("Navigating to /chatgpt");
-      Get.toNamed('/chatgpt');
-      break;
-    default:
-      print("Unknown index: $index");
+        print("Navigating to /chatgpt");
+        Get.toNamed('/chatgpt');
+        break;
+      default:
+        print("Unknown index: $index");
     }
   }
 }

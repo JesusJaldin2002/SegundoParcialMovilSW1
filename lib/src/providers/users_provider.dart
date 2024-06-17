@@ -6,9 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UsersProvider extends GetConnect {
   String url = Environment.apiUrl;
 
-  Future<Response> login(String email, String password) async {
+  Future<Response> login(String email, String password, String? fcmToken) async {
     Response response = await post(
-        '$url/api/login', {'email': email, 'password': password},
+        '$url/api/login', 
+        {'email': email, 'password': password, 'fcm_token': fcmToken},
         headers: {'Content-Type': 'application/json'});
 
     return response;
@@ -33,7 +34,7 @@ class UsersProvider extends GetConnect {
     String? token = prefs.getString('token');
 
     if (token != null) {
-      // Llamar a la API para cerrar la sesión
+      // Llamar a la API para  cerrar la sesión
       await post(
         '$url/api/logout',
         {},

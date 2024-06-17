@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762532255247",
+    "project_id": "segundoparcialsw1-27837",
+    "storage_bucket": "segundoparcialsw1-27837.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762532255247:android:93fe4d3b9b2dd9e233b57a",
+        "android_client_info": {
+          "package_name": "com.example.segundo_parcial_movil_sw1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpkm9R9QMmdt0eDWS_rGo5Or74e3jUW8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

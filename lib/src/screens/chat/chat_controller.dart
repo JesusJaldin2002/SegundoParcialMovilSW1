@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:get/get.dart';
 import 'package:segundo_parcial_movil_sw1/src/providers/chatgpt_provider.dart';
 import 'package:segundo_parcial_movil_sw1/src/models/chat_response.dart';
