@@ -1,5 +1,5 @@
 // ignore_for_file: avoid_print
-
+import 'package:intl/date_symbol_data_local.dart'; // Importa la inicialización de datos de fechas
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:segundo_parcial_movil_sw1/src/config/environment/environment.dart';
@@ -24,6 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  await initializeDateFormatting('es_ES', null);
   // Configuración de notificaciones locales
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -153,6 +154,19 @@ class _MyAppState extends State<MyApp> {
         GetPage(
             name: '/chatgpt',
             page: () => ChatScreen(),
+            middlewares: [AuthMiddleware()]),
+        GetPage(
+            name: '/attendance-list/:id',
+            page: () =>
+                AttendanceListScreen(id: int.parse(Get.parameters['id']!)),
+            middlewares: [AuthMiddleware()]),
+        GetPage(
+            name: '/inscribed-students',
+            page: () => InscribedStudentsScreen(),
+            middlewares: [AuthMiddleware()]),
+        GetPage(
+            name: '/attendance-detail',
+            page: () => AttendanceDetailScreen(),
             middlewares: [AuthMiddleware()]),
       ],
       navigatorKey: Get.key,

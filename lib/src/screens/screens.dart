@@ -6,3 +6,6 @@ export 'notices/notices_screen.dart';
 export 'events/events_screen.dart';
 export 'boletin/boletin_screen.dart';
 export 'chat/chat_screen.dart';
+export 'attendance_list/attendance_list_screen.dart';
+export 'inscribed_students/inscribed_students_screen.dart';
+export 'inscribed_students/attendance_detail_screen.dart';

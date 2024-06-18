@@ -86,15 +86,27 @@ class CoursesScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.visibility, color: Color.fromARGB(255, 45, 70, 40)),
-                          onPressed: () => _onViewNoticesTap(context, course),
+                        TextButton.icon(
+                          onPressed: () => _onAttendanceListTap(context, course),
+                          icon: const Icon(Icons.list, color: Color.fromARGB(255, 45, 70, 40)),
+                          label: const Text(
+                            'Lista de Asistencias',
+                            style: TextStyle(color: Color.fromARGB(255, 45, 70, 40)),
+                          ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.add, color: Color.fromARGB(255, 45, 70, 40)),
-                          onPressed: () => _onCreateNoticeTap(context, course),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.visibility, color: Color.fromARGB(255, 45, 70, 40)),
+                              onPressed: () => _onViewNoticesTap(context, course),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.add, color: Color.fromARGB(255, 45, 70, 40)),
+                              onPressed: () => _onCreateNoticeTap(context, course),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -116,5 +128,10 @@ class CoursesScreen extends StatelessWidget {
   void _onCreateNoticeTap(BuildContext context, Curso course) {
     // Navegar a la pantalla para crear avisos con el curso_materia_id correspondiente
     Get.toNamed('/create-notice/${course.cursoMateriaId}');
+  }
+
+  void _onAttendanceListTap(BuildContext context, Curso course) {
+    // Navegar a la pantalla para la lista de asistencias con el curso_materia_id correspondiente
+    Get.toNamed('/attendance-list/${course.cursoMateriaId}');
   }
 }
